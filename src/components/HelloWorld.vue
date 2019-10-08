@@ -8,15 +8,23 @@
 <script>
 import Hello from './Hello.vue'
 export default {
-    name: 'HelloWorld',
+    name: 'B',
     props: {
         msg: String
     },
     components: { Hello },
     inject: ['app'],
+    created () {
+        this.$on('on-message', this.showMessage)
+    },
     mounted () {
-        console.log(this.app.person)
-        console.log(this.app.updateName)
+        // console.log(this.app.person)
+        // console.log(this.app.updateName)
+    },
+    methods: {
+        showMessage (text) {
+            console.log(text)
+        }
     }
 }
 </script>

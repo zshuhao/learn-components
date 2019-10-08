@@ -6,13 +6,15 @@
 </template>
 
 <script>
-// @ is an alias to /src
+
 import HelloWorld from '@/components/HelloWorld.vue'
+import Emitter from '../mixins/emitter'
 export default {
     name: 'home',
     components: {
         HelloWorld
     },
+    mixins: [ Emitter ],
     data () {
         return {
             obj: {
@@ -20,11 +22,15 @@ export default {
             }
         }
     },
+    created () {
+        this.$on('on-alert', this.showMessage)
+    },
     methods: {
         handleTest () {
-            console.log(this.obj)
-            this.obj.name = 'lele'
-            console.log(this.obj)
+            this.broadcast('B', 'on-message', 'Hello Vue.js')
+        },
+        showMessage (text) {
+            console.log(text)
         }
     }
 }

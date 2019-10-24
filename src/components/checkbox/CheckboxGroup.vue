@@ -1,50 +1,56 @@
 <template>
-    <label>
-        <span>
-            <input type="checkbox" :disabled="disabled" :checked="currentValue" @change="change">
-        </span>
-    </label>
+    <div>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-// import {} from '
+import { findComponentsDownward } from '../../utils/assist'
+import Emitter from '../../mixins/emitter'
 export default {
-    name: 'iCheckbox',
+    name: 'iCheckboxGroup',
+    mixins: [ Emitter ],
     props: {
-        disabled: {
-            type: Boolean,
-            default: false
-        },
         value: {
-            type: [String, Number, Boolean],
-            default: false
-        },
-        trueValue: {
-            type: [String, Number, Boolean],
-            default: true
-        },
-        falseValue: {
-            type: [String, Number, Boolean],
-            default: false
+            type: Array,
+            default: () => []
         }
     },
     data () {
         return {
-            currentValue: this.value
+            currentValue: this.value,
+            children: []
         }
     },
+    watch: {
+        value () {
+            this.updateModel(true)
+        }
+    },
+    mounted () {
+        this.updateModel(true)
+    },
     methods: {
-        change (event) {
-            if (this.disabled) {
-                return false
+        updateModel (update) {
+            this.childrens = findComponentsDownward(this, 'iCheckbox')
+            // 把 CheckboxGroup 的 value，赋值给 Checkbox 的 model，并根据 Checkbox 的 label，设置一次当前 Checkbox 的选中状态
+            if (this.childrens) {
+                const { value } = this
+                this.childrens.forEach(child => {
+                    child.model = value
+
+                    if (update) {
+                        child.currentValue = value.indexOf(child.label) >= 0
+                        child.group = true
+                    }
+                })
             }
-
-            const checked = event.target.checked
-            this.currentValue = checked
-
-            const value = checked ? this.trueValue : this.falseValue
-            this.$emit('input', value)
-            this.$emit('on-change', value)
+        },
+        change (data) {
+            this.currentValue = data
+            this.$emit('input', data)
+            this.$emit('on-change', data)
+            this.dispatch('iFormItem', 'on-form-change', data)
         }
     }
 }

@@ -23,6 +23,11 @@ export default new Router({
             path: '/form',
             name: 'FormIndex',
             component: () => import(/* webpackChunkName: "about" */ './views/form/Index.vue')
+        },
+        {
+            path: '/checkbox',
+            name: 'CheckoutIndex',
+            component: () => import(/* webpackChunkName: "about" */ './views/checkbox/Index.vue')
         }
     ]
 })

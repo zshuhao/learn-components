@@ -2,7 +2,8 @@
 
 module.exports = {
     // 设置webpack配置，vue-cli会将配置merge进去webpack.config.js中去
-    publicPath: './'
+    publicPath: './',
+    runtimeCompiler: true
     // productionSourceMap: false,
     // configureWebpack: config => {
     //     if (process.env.NODE_ENV === 'production') {

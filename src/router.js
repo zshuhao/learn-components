@@ -28,6 +28,11 @@ export default new Router({
             path: '/checkbox',
             name: 'CheckoutIndex',
             component: () => import(/* webpackChunkName: "about" */ './views/checkbox/Index.vue')
+        },
+        {
+            path: '/display',
+            name: 'Display',
+            component: () => import(/* webpackChunkName: "about" */ './views/display.vue')
         }
     ]
 })

@@ -38,6 +38,11 @@ export default new Router({
             path: '/table',
             name: 'table',
             component: () => import(/* webpackChunkName: "about" */ './views/table-render.vue')
+        },
+        {
+            path: '/table-slot',
+            name: 'tableSlot',
+            component: () => import(/* webpackChunkName: "about" */ './views/table-slot.vue')
         }
     ]
 })

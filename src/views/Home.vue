@@ -2,6 +2,7 @@
     <div class="home">
         <HelloWorld msg="Welcome to Your Vue.js App"/>
         <button @click="handleTest">测试按钮</button>
+        <button @click="alertFun">Alert</button>
     </div>
 </template>
 
@@ -31,6 +32,11 @@ export default {
         },
         showMessage (text) {
             console.log(text)
+        },
+        alertFun () {
+            this.$Alert.info({
+                content: '我是提示信息 1'
+            })
         }
     }
 }

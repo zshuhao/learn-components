@@ -33,6 +33,11 @@ export default new Router({
             path: '/display',
             name: 'Display',
             component: () => import(/* webpackChunkName: "about" */ './views/display.vue')
+        },
+        {
+            path: '/table',
+            name: 'table',
+            component: () => import(/* webpackChunkName: "about" */ './views/table-render.vue')
         }
     ]
 })

@@ -43,6 +43,11 @@ export default new Router({
             path: '/table-slot',
             name: 'tableSlot',
             component: () => import(/* webpackChunkName: "about" */ './views/table-slot.vue')
+        },
+        {
+            path: '/tree',
+            name: 'tree',
+            component: () => import(/* webpackChunkName: "about" */ './views/tree.vue')
         }
     ]
 })
